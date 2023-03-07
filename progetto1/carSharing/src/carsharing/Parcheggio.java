@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @author matte
  */
 public class Parcheggio {
-    private int nPosti;
-    private String nome;
-    private ArrayList<Automobile> automobili;
+    private int nPosti;//posti massimi parcheggio
+    private String nome;//nome del parcheggio
+    private ArrayList<Automobile> automobili;//array delle automobili presenti nel parcheggio
     
     public Parcheggio(String nome, int nPosti){
         this.nome=nome;
@@ -46,7 +46,14 @@ public class Parcheggio {
     public ArrayList<Automobile> getAutomobili() {
         return automobili;
     }
+
+    public void setAutomobili(ArrayList<Automobile> automobili) {
+        this.automobili = automobili;
+    }
     
+    public int getCount(){
+        return automobili.size();
+    }
     
     
     
