@@ -11,8 +11,8 @@ import java.util.ArrayList;
  * @author Yassin
  */
 public class ParcoAutomobili {
-    private ArrayList<Parcheggio> parcheggi;
 
+    private ArrayList<Parcheggio> parcheggi;
 
     public ParcoAutomobili() {
         this.parcheggi = new ArrayList<Parcheggio>();
@@ -21,76 +21,89 @@ public class ParcoAutomobili {
     public ArrayList<Parcheggio> getParcheggi() {
         return parcheggi;
     }
-    
-        public String rmAuto(String targa){
-        boolean sem=false;
-        for (Parcheggio p: parcheggi){
-            for(Automobile a: p.getAutomobili()){
-                if(a.getTarga().equals(targa)){
-                    ArrayList<Automobile>tmp=p.getAutomobili();
+
+    public String rmAuto(String targa) {
+        boolean sem = false;
+        for (Parcheggio p : parcheggi) {
+            for (Automobile a : p.getAutomobili()) {
+                if (a.getTarga().equals(targa)) {
+                    ArrayList<Automobile> tmp = p.getAutomobili();
                     tmp.remove(a);
                     p.setAutomobili(tmp);
-                    sem=true;
+                    sem = true;
+                } else {
+                    sem = false;
                 }
-                else sem=false;
             }
         }
-        
-        if(sem) return "automobile con targa "+targa+" eliminata con successa";
-        else return "automobile con targa "+targa+" non trovata";
+
+        if (sem) {
+            return "automobile con targa " + targa + " eliminata con successa";
+        } else {
+            return "automobile con targa " + targa + " non trovata";
+        }
     }
-    
-    public String addAuto(Automobile a,String nome){
-        boolean messo=false;
-        for(Parcheggio p:parcheggi){
-        if(p.getNome().equals(nome))
-                if(p.AddAuto(a)){
-                    messo=true;
+
+    public String addAuto(Automobile a, String nome) {
+        boolean messo = false;
+        for (Parcheggio p : parcheggi) {
+            if (p.getNome().equals(nome)) {
+                if (p.AddAuto(a)) {
+                    messo = true;
                 }
+            }
         }
-        if(messo){
+        if (messo) {
             return "veicolo inserito con successo";
+        } else {
+            return "errore durante l'inserimento del veicolo";
         }
-        else return "errore durante l'inserimento del veicolo";
-        
+
     }
-    public String addPark(Parcheggio t){
+
+    public String addPark(Parcheggio t) {
         boolean sem = false;
-        for(Parcheggio p:parcheggi){
-            if(p.getNome().equals(t.getNome())){
-                sem=false;
+        for (Parcheggio p : parcheggi) {
+            if (p.getNome().equals(t.getNome())) {
+                sem = false;
                 break;
-            }else sem=true;
+            } else {
+                sem = true;
+            }
         }
-        if(sem){
+        if (sem) {
             parcheggi.add(t);
             return "Aggiunto nuovo parcheggio";
-        }else return "Parcheggio con nome già esistente";
+        } else {
+            return "Parcheggio con nome già esistente";
+        }
     }
-    
-    public void rmAuto(int maxViaggi){
-        for(Parcheggio p:parcheggi){
-            for(Automobile a:p.getAutomobili()){
-                if(a.getnViaggi()>=maxViaggi){
-                    ArrayList<Automobile>tmp=p.getAutomobili();
+
+    public String rmAuto(int maxViaggi) {
+        for (Parcheggio p : parcheggi) {
+            for (Automobile a : p.getAutomobili()) {
+                if (a.getnViaggi() >= maxViaggi) {
+                    ArrayList<Automobile> tmp = p.getAutomobili();
                     tmp.remove(a);
                     p.setAutomobili(tmp);
+                    return "Rimossa l'auto con targa " + a.getTarga() + "che supera " + maxViaggi + " viaggi";
                 }
             }
         }
     }
-    
-    public void transitaAuto(Automobile a, String Nome){
-        for(Parcheggio t:parcheggi){
-            for(Automobile q:t.getAutomobili()){
-                if(a.equals(a)){
+
+    public String transitaAuto(Automobile a, String Nome) {
+        for (Parcheggio t : parcheggi) {
+            for (Automobile q : t.getAutomobili()) {
+                if (a.equals(a)) {
                     t.getAutomobili().remove(a);
                 }
             }
-            if(t.getNome().equals(Nome)){
+            if (t.getNome().equals(Nome)) {
                 t.AddAuto(a);
+                return "Auto con targa" + a.getTarga() + " è stata spostata nel parcheggio" + t.getNome() +"";
             }
         }
-        
+
     }
 }
