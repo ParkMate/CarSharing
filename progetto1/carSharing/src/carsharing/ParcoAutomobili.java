@@ -3,19 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package carsharing;
+
 import java.util.ArrayList;
+
 /**
  *
- * @author matte
+ * @author Yassin
  */
 public class ParcoAutomobili {
     private ArrayList<Parcheggio> parcheggi;
-    
-    public ParcoAutomobili(){
+
+
+    public ParcoAutomobili() {
         this.parcheggi = new ArrayList<Parcheggio>();
     }
+
+    public ArrayList<Parcheggio> getParcheggi() {
+        return parcheggi;
+    }
     
-    public String rmAuto(String targa){
+        public String rmAuto(String targa){
         boolean sem=false;
         for (Parcheggio p: parcheggi){
             for(Automobile a: p.getAutomobili()){
@@ -47,7 +54,43 @@ public class ParcoAutomobili {
         else return "errore durante l'inserimento del veicolo";
         
     }
+    public String addPark(Parcheggio t){
+        boolean sem = false;
+        for(Parcheggio p:parcheggi){
+            if(p.getNome().equals(t.getNome())){
+                sem=false;
+                break;
+            }else sem=true;
+        }
+        if(sem){
+            parcheggi.add(t);
+            return "Aggiunto nuovo parcheggio";
+        }else return "Parcheggio con nome già esistente";
+    }
     
+    public void rmAuto(int maxViaggi){
+        for(Parcheggio p:parcheggi){
+            for(Automobile a:p.getAutomobili()){
+                if(a.getnViaggi()>=maxViaggi){
+                    ArrayList<Automobile>tmp=p.getAutomobili();
+                    tmp.remove(a);
+                    p.setAutomobili(tmp);
+                }
+            }
+        }
+    }
     
+    public void transitaAuto(Automobile a, String Nome){
+        for(Parcheggio t:parcheggi){
+            for(Automobile q:t.getAutomobili()){
+                if(a.equals(a)){
+                    t.getAutomobili().remove(a);
+                }
+            }
+            if(t.getNome().equals(Nome)){
+                t.AddAuto(a);
+            }
+        }
+        
+    }
 }
-
